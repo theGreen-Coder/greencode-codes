@@ -30,14 +30,21 @@
       <description></description>
     </item>
     <item>
-      <title>About</title>
+      <title>About Me</title>
       <link>https://greencode.codes/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://greencode.codes/about/</guid>
       <description>about</description>
     </item>
     <item>
-      <title>Gradient Weekly</title>
+      <title>How I Open-Sourced My Code</title>
+      <link>https://greencode.codes/support/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://greencode.codes/support/</guid>
+      <description>support me</description>
+    </item>
+    <item>
+      <title>Newsletter</title>
       <link>https://greencode.codes/newsletter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://greencode.codes/newsletter/</guid>
@@ -49,13 +56,6 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://greencode.codes/sponsors/</guid>
       <description>sponsors</description>
-    </item>
-    <item>
-      <title>Support</title>
-      <link>https://greencode.codes/support/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://greencode.codes/support/</guid>
-      <description>support</description>
     </item>
   </channel>
 </rss>
