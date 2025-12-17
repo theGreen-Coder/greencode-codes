@@ -1,0 +1,265 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define ANSI_COLOR_RED "\x1b[31m"
+#define ANSI_COLOR_GREEN "\x1b[32m"
+#define ANSI_COLOR_YELLOW "\x1b[33m"
+#define ANSI_COLOR_BLUE "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN "\x1b[36m"
+#define ANSI_COLOR_RESET "\x1b[0m"
+
+int num_bombes = 10;
+int num_files = 10;
+int num_columnes = 10;
+char mapa_visual[1000][1000];
+char mapa_sol[1000][1000];
+int fila;
+int columna;
+time_t t;
+int filar;
+int columnar;
+int numero_destapadas = 0;
+char to_print[12];
+
+void destapar0(int fil, int column) {
+	for (int r = -1; r < 2; r++) {
+		for (int l = -1; l < 2; l++) {
+			if (!(fil + r < 0 || column < 0 || fil > (num_files - 1) ||
+				  column > (num_columnes - 1))) {
+				if (mapa_sol[fil + r][column + l] == '0' &&
+					mapa_visual[fil + r][column + l] == '#') {
+					mapa_visual[fil + r][column + l] =
+						mapa_sol[fil + r][column + l];
+					destapar0(fil + r, column + l);
+				}else{
+          mapa_visual[fil + r][column + l] =
+						mapa_sol[fil + r][column + l];
+        }
+			}
+		}
+	}
+}
+
+
+void print_mv() {
+	printf(ANSI_COLOR_YELLOW "   1" ANSI_COLOR_YELLOW);
+	for (int i = 2; i <= num_files; i++) {
+		if (i <= 9) {
+			printf(ANSI_COLOR_YELLOW "  %d" ANSI_COLOR_YELLOW, i);
+		}
+		if (i > 9) {
+			printf(ANSI_COLOR_YELLOW " %d" ANSI_COLOR_YELLOW, i);
+		}
+	}
+	printf("\n");
+
+	for (int i = 0; i < num_files; i++) {
+		if (i <= 8) {
+			printf(ANSI_COLOR_YELLOW "%d  " ANSI_COLOR_YELLOW, i + 1);
+		}
+		if (i >= 9) {
+			printf(ANSI_COLOR_YELLOW "%d " ANSI_COLOR_YELLOW, i + 1);
+		}
+		for (int s = 0; s < num_columnes; s++) {
+			int variable = mapa_visual[i][s];
+			if (mapa_visual[i][s] != '#') {
+				printf(ANSI_COLOR_BLUE "%c" ANSI_COLOR_BLUE, variable);
+				printf("  ");
+			} else if (mapa_visual[i][s] == '#') {
+				printf(ANSI_COLOR_GREEN "%c" ANSI_COLOR_GREEN, variable);
+				printf("  ");
+			} else if (mapa_visual[i][s] == '*') {
+				printf(ANSI_COLOR_RED "%c" ANSI_COLOR_RED, variable);
+				printf("  ");
+			}
+		}
+		printf("\n");
+	}
+}
+
+void print_ms() {
+	printf(ANSI_COLOR_YELLOW "   1" ANSI_COLOR_YELLOW);
+	for (int i = 2; i <= num_files; i++) {
+		if (i <= 9) {
+			printf(ANSI_COLOR_YELLOW "  %d" ANSI_COLOR_YELLOW, i);
+		}
+		if (i > 9) {
+			printf(ANSI_COLOR_YELLOW " %d" ANSI_COLOR_YELLOW, i);
+		}
+	}
+	printf("\n");
+
+	for (int i = 0; i < num_files; i++) {
+		if (i <= 8) {
+			printf(ANSI_COLOR_YELLOW "%d  " ANSI_COLOR_YELLOW, i + 1);
+		}
+		if (i >= 9) {
+			printf(ANSI_COLOR_YELLOW "%d " ANSI_COLOR_YELLOW, i + 1);
+		}
+		for (int s = 0; s < num_columnes; s++) {
+			int variable = mapa_sol[i][s];
+			if (mapa_visual[i][s] != '#' && mapa_visual[i][s] != '*') {
+				printf(ANSI_COLOR_BLUE "%c" ANSI_COLOR_BLUE, variable);
+				printf("  ");
+			} else if (mapa_visual[i][s] == '#') {
+				printf(ANSI_COLOR_GREEN "%c" ANSI_COLOR_GREEN, variable);
+				printf("  ");
+			} else if (mapa_visual[i][s] == '*') {
+				printf(ANSI_COLOR_RED "%c" ANSI_COLOR_RED, variable);
+				printf("  ");
+			}
+		}
+		printf("\n");
+	}
+}
+
+void inicio() {
+	printf(ANSI_COLOR_RESET
+		   "                          MINESWEEPER" ANSI_COLOR_RESET);
+	printf("\n");
+  printf("(wait for it...)");
+	printf("\n");
+  
+
+	for (int i = 0; i < num_files; i++) {
+		for (int s = 0; s < num_columnes; s++) {
+			mapa_visual[i][s] = '#';
+		}
+	}
+	for (int i = 0; i < num_files; i++) {
+		for (int s = 0; s < num_columnes; s++) {
+			mapa_sol[i][s] = '0';
+		}
+	}
+	for (int j = 0; j < num_bombes; j++) {
+		srand((unsigned)time(&t));
+		int nr_files = rand() % num_files;
+		int nr_columnes = rand() % num_columnes;
+		if (mapa_sol[nr_files][nr_columnes] != '*') {
+			mapa_sol[nr_files][nr_columnes] = '*';
+		} else {
+			j -= 1;
+		}
+	}
+	for (int f = 0; f < num_files; f++) {
+		for (int c = 0; c < num_columnes; c++) {
+			if (mapa_sol[f][c] == '*') {
+				if (mapa_sol[f][c + 1] != '*') {
+					mapa_sol[f][c + 1] += 1;
+				}
+				if (mapa_sol[f][c - 1] != '*') {
+					mapa_sol[f][c - 1] += 1;
+				}
+
+				if (mapa_sol[f + 1][c + 1] != '*') {
+					mapa_sol[f + 1][c + 1] += 1;
+				}
+				if (mapa_sol[f + 1][c - 1] != '*') {
+					mapa_sol[f + 1][c - 1] += 1;
+				}
+				if (mapa_sol[f + 1][c] != '*') {
+					mapa_sol[f + 1][c] += 1;
+				}
+
+				if (mapa_sol[f - 1][c + 1] != '*') {
+					mapa_sol[f - 1][c + 1] += 1;
+				}
+				if (mapa_sol[f - 1][c - 1] != '*') {
+					mapa_sol[f - 1][c - 1] += 1;
+				}
+				if (mapa_sol[f - 1][c] != '*') {
+					mapa_sol[f - 1][c] += 1;
+				}
+			}
+		}
+	}
+}
+
+int main(void) {
+	while (1) {
+		int aux = 0;
+		inicio();
+		while (aux == 0) {
+      printf("\n");
+			printf("\n");
+			print_mv();
+			printf("\n");
+			printf("\n");
+
+      for (int i = 0; i < num_files; i++) {
+		    for (int s = 0; s < num_columnes; s++) {
+			    if(mapa_visual[i][s] == '#'){
+            numero_destapadas +=1;
+          }
+		    }
+	    }
+      
+      if(numero_destapadas == num_bombes){
+        printf("YOU WON");
+        printf("\n");
+				printf("\n");
+				printf("Htslwfyzqfyntsx ts bnssnsl! Rfpj xzwj yt lt yt myyux://lwjjshtij.htijx/jfxyjw-jll/");
+				// char Y[100];
+				int d;
+				scanf("%d", &d);
+				if (d == 1) {
+					aux = 1;
+					printf("\n");
+					printf("\n");
+				} else if (d == 0) {
+					for (int q = 0; q < 10000; q++) {
+						printf("\n");
+						printf("ΩΩ");
+					}
+				}
+        
+      }
+      numero_destapadas = 0;
+
+			printf("\n");
+			printf("\n");
+			printf(ANSI_COLOR_RESET
+				   "Row: " ANSI_COLOR_RESET);
+			scanf("%d", &fila);
+			printf("\n");
+			printf(ANSI_COLOR_RESET
+				   "Column: " ANSI_COLOR_RESET);
+			scanf("%d", &columna);
+			printf("\n");
+			fila -= 1;
+			columna -= 1;
+			mapa_visual[fila][columna] = mapa_sol[fila][columna];
+			if (mapa_sol[fila][columna] != '*') {
+				if (mapa_sol[fila][columna] == '0') {
+					destapar0(fila, columna);
+				}
+				
+			} else if (mapa_sol[fila][columna] == '*') {
+				printf("\n");
+				printf("\n");
+				print_ms();
+				printf("\n");
+				printf("\n");
+				printf("GAME OVER");
+				printf("\n");
+				printf("\n");
+				printf("Press 1 to play again:");
+				// char Y[100];
+				int d;
+				scanf("%d", &d);
+				if (d == 1) {
+					aux = 1;
+					printf("\n");
+					printf("\n");
+				} else if (d == 0) {
+					for (int q = 0; q < 10000; q++) {
+						printf("\n");
+						printf("ΩΩ");
+					}
+				}
+			}
+		}
+	}
+}

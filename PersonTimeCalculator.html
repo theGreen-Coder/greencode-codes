@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+html{
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(-45deg, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
+    background-size: 400% 400%;
+    animation: gradient 20s ease infinite;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: sans-serif;
+    height: 100%;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0%;
+    }
+
+    50% {
+        background-position: 100%;
+    }
+
+    100% {
+        background-position: 0%;
+    }
+}
+
+#personGallery{
+    margin-top: 20px;
+    display: flex !important;
+    flex-direction: row;
+}
+
+.personCard {
+    border: 3px solid rgba(255, 255, 255, .3);
+    border-radius: 15px;
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+}
+
+.frontCard{
+    width: 300px !important;
+    margin-right: 20px;
+}
+
+.frontCard h2{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+@keyframes backgr {
+    0% {
+        background-position: 0%;
+    }
+
+    50% {
+        background-position: 100%;
+    }
+
+    100% {
+        background-position: 0%;
+    }
+}
+
+a {
+    color: white;
+}
+
+button {
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #5a55ae;
+    color: white;
+    border: 0px solid;
+    border-radius: 5px;
+    width: 150px;
+    opacity: 0.6;
+}
+
+button:hover {
+    padding: 7px;
+    border: 3px solid rgb(71, 86, 174);
+    cursor: pointer;
+}
+
+#hiddenForm p{
+    margin: 0px 0px 5px 0px;
+    font-family: sans-serif;
+}
+
+input {
+    border: none;
+    border-radius: 5px;
+    width: 40%;
+    height: 40px;
+    background-color: #5a55ae;
+    opacity: 0.4;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    /* Removes the default border */
+}
+
+select{
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    background-color: #5a55ae;
+    opacity: 0.4;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.marginInput{
+    margin-bottom: 15px;
+}
+
+input:focus {
+    /* Removes the border when the input is clicked */
+}
+
+select{
+    margin-left: 10px;
+}
+
+::placeholder{
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    text-align: center;
+}
+
+h5 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15px;
+}
+
+#mainArea {
+    width: 80%;
+    margin: auto;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.containDIV {
+    display: flex;
+    flex-direction: row;
+}
+
+.insideDIV {
+    width: 100%;
+}
+
+.timeSpend {}
+
+
+#hiddenForm {
+    display: none;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.disappear {
+    opacity: 0 !important;
+    animation: downToUp 1s ease-in forwards;
+}
+
+@keyframes downToUp {
+    0% {
+        opacity: 100%;
+        transform: translateY(0%);
+    }
+    99%{
+        opacity: 0%;
+        transform: translateY(-10%);
+    }
+    100% {
+        display: none !important;
+    }
+}
+
+.appear {
+    animation: upToDown 2s ease-in forwards;
+}
+
+@keyframes upToDown {
+    0% {
+        opacity: 0%;
+        transform: translateY(-10%);
+    }
+
+    50% {
+        opacity: 0%;
+        transform: translateY(-10%);
+    }
+    99%{
+        opacity: 100%;
+        transform: translateY(0%);
+    }
+
+    100% {
+        display: block !important;
+    }
+}
+
+progress{
+    width: 100%;
+}
+
+#featuredDiv{
+    position: absolute;
+}
+
+.featureButton{
+    
+}
+
+#featureButtonDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#nextDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.nextButton{
+    padding: 8px 0px 8px 0px !important;
+    width: 130px;
+    text-align: center;
+    background-color: #5a55ae;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    opacity: 0.6;
+}
+
+.nextButton:hover {
+    padding: 0px;
+    border: 0px;
+    cursor: pointer;
+}
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+</head>
+
+<body>
+    <div id="flexDIV">
+        <div id="mainArea">
+            <h1>Person Time Calculator</h1>
+            <p>Many people think that one of the main purposes in life is to connect with other people. I'm one of those
+                people.</p>
+            <p>After reading Tim Urban's article <a href="https://waitbutwhy.com/2015/12/the-tail-end.html"
+                    target="_blank">The Tail End</a>, I decided to make this website as a reminder to myself that time
+                with
+                the people we love is ephemeral.</p>
+            <p>So, we should be intentional with our time and use it wisely. Be as present as possible.</p><br>
+            <h2>Lost time is never found again. – Benjamin Franklin.</h2><br>
+
+            <button id="addPerson" onclick="displayForm()" type="button" class="btn btn-primary btn-lg btn-block">Add a
+                Person</button>
+
+
+        </div>
+    </div>
+    <section id="personGallery"></section><br>
+    <section id="featuredDiv">
+        <section id="featuredCard"></section><br>
+        <section id="featureButtonDiv">
+            <button class="featureButton" onclick="featuredButtons('home');">Go Back Home</button>
+            <button class="featureButton" onclick="featuredButtons('delete');">Delete</button>
+            <button class="featureButton" onclick="featuredButtons('person');">Add Another Person</button>
+        </section>
+    </section>
+    <div id="hiddenForm">
+        <p>Name</p>
+        <input type="text" id="inputName" placeholder="Name" class="marginInput" required="required">
+        <p>Birthdate</p>
+        <input type="date" id="inputBirthDate" placeholder="Birthdate" class="marginInput" required="required">
+        <p>Life Expectancy</p>
+        <input type="number" id="inputExpectancy" placeholder="Life Expectancy" class="marginInput" required="required">
+        <p>How much time have you spent on average with this person in the past?</p>
+
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <input type="number" class="form-control" id="inputNumberofDaysPast" placeholder="Number of Days"
+                style="width: 150px;" required="required">
+            <select name="daysPast" id="daysPast" style="margin-right: 10px;">
+                <option value="month">per Month</option>
+                <option value="year">per Year</option>
+            </select>
+            <p style="margin: 0px 10px 0px 0px;">during</p>
+            <input type="number" class="form-control" id="inputYears" placeholder="Number of Years"
+                style="width: 150px;" required="required">
+        </div>
+        <p style="margin-top: 15px;">How much time are you currently spending with this person?</p>
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <input type="number" class="form-control" id="inputNumberofDaysNow" placeholder="Number of Days"
+                style="width: 150px;" required="required">
+            <select name="daysNow" id="daysNow" style="margin-right: 10px;">
+                <option value="month">per Month</option>
+                <option value="year">per Year</option>
+            </select>
+        </div><br>
+        <button type="submit" onclick="getValues();" id="sumbitButton">Add Person</button>
+    </div>
+</body>
+
+<script>
+    let currentDate = new Date();
+let finalHTML = "";
+let actualHTML = "";
+document.getElementById("featuredDiv").style.display = "none";
+
+function restDates(firstDate, secondDate, str) {
+    const d1 = new Date(firstDate);
+    const d2 = new Date(secondDate);
+    const diffTime = Math.abs(d2 - d1);
+    const diffDays = (diffTime / (1000 * 60 * 60 * 24)).toFixed(0);
+    const diffMonths = (diffTime / (1000 * 60 * 60 * 24 * 30.437)).toFixed(2);
+    const diffYears = (diffTime / (1000 * 60 * 60 * 24 * 365.25)).toFixed(2);
+    if (str === "d") {
+        return diffDays;
+    }
+    else if (str === "m") {
+        return diffMonths;
+    }
+    else if (str === "y") {
+        return diffYears;
+    }
+    else {
+        return null;
+    }
+
+}
+
+function calculateLifeDate(birthDate, lifeExpectancy) {
+    let lastFive = Number(birthDate.substr(birthDate.length - 4));
+    let returnDate = birthDate.substring(0, 6) + String(lastFive + lifeExpectancy)
+    return returnDate;
+}
+
+
+function createPerson(name, birthDate, pastSpent, currentSpent, lifeExpectancy) {
+    finalHTML = "";
+    actualHTML = "<div class='personCard frontCard'>";
+    let lifeExpectancyDate = calculateLifeDate(birthDate, lifeExpectancy);
+    let age = restDates(currentDate, birthDate, "y");
+    let inYears = restDates(currentDate, lifeExpectancyDate, "y");
+    let inMonths = restDates(currentDate, lifeExpectancyDate, "m");
+    let inDays = restDates(currentDate, lifeExpectancyDate, "d");
+    let percentatge = ((currentSpent / 365.25) * 100).toFixed(2);
+    let daysLeft = (inYears * currentSpent).toFixed(0);
+    let totalPercentage = Number(pastSpent) / (Number(pastSpent) + Number(daysLeft)).toFixed(4);
+    totalPercentage = (totalPercentage * 100).toFixed(2);
+
+    finalHTML += "<h2>" + name + "</h2>";
+    finalHTML += "<p style='text-align:center; margin-bottom: 0px; margin-top: 0px; font-size: 40px'><b>" + daysLeft + "</b></p>";
+    finalHTML += "<p style='text-align:center; margin-bottom: 0px; font-size: 20px'>Days Left</p><br>";
+    finalHTML += "<p style='text-align:right; margin-bottom: 3px; font-size: 10px'><b>You Have Spent " + String(totalPercentage) + "% of Your Total Time with This Person</b></p>";
+    finalHTML += "<progress max='100' value='" + String(totalPercentage) + "'></progress>"
+
+    actualHTML += finalHTML;
+    actualHTML += "<div id='nextDiv'><a class='nextButton' href='https://www.thetrainline.com/' target='_blank'>Next Train</a>";
+    actualHTML += "<div id='nextDiv'><a class='nextButton' href='https://google.com/travel/flights' target='_blank'>Next Flight</a>";
+
+    finalHTML = "<div class='personCard'>" + finalHTML;
+
+    finalHTML += "<h4> Age: " + String(age) + "</h4>";
+
+    finalHTML += "<div class='containDIV'>";
+    finalHTML += "<div class='timeLeft insideDIV'>";
+
+    finalHTML += "<h5>Total Available Time Left</h5>";
+    finalHTML += "<p> in Years: <b>" + String(inYears) + " years</b></p>";
+    finalHTML += "<p> in Months: <b>" + String(inMonths) + " months</b></p>";
+    finalHTML += "<p> in Days: <b>" + String(inDays) + " days</b></p>";
+    finalHTML += "</div>"; // timeLeft
+
+    finalHTML += "<div class='timeSpend insideDIV'>";
+
+    finalHTML += "<h5>Time I Spend</h5>";
+    finalHTML += "<p> Time Already Spent: <b>" + String(pastSpent) + " days</b></p>";
+    finalHTML += "<p> Current Frequency: <b>" + String(currentSpent) + " Days per Year</b></p>";
+
+    finalHTML += "<p> % of Available Time: <b>" + String(percentatge) + "</b></p>";
+
+    finalHTML += "</div>"; // timeSpend
+
+    finalHTML += "</div>"; // containDIV
+    finalHTML += "</div>";
+
+    console.log("Hello Again");
+    document.getElementById('featuredCard').innerHTML = finalHTML;
+    document.getElementById("featuredDiv").style.display = "block";
+}
+
+function getValues() {
+    let name = document.getElementById("inputName").value;
+    let birthDate = document.getElementById("inputBirthDate").value;
+    // Convert Birthdate Data Type
+    birthDate = String(birthDate.substring(5, 7) + "/" + birthDate.substring(8, 10) + "/" + birthDate.substring(0, 4));
+    let lifeExpectancy = document.getElementById("inputExpectancy").value;
+
+    // Currently Spend
+    let currentSpend = document.getElementById("inputNumberofDaysNow").value;
+    let dropValNow = document.getElementById("daysNow").value;
+    if (dropValNow === "month") {
+        currentSpend *= 12;
+    } else if (dropValNow === "year") {
+        currentSpend = currentSpend;
+    }
+
+    // Past Spend
+    let pastSpend = document.getElementById("inputNumberofDaysPast").value;
+    let dropValPast = document.getElementById("daysPast").value;
+    let durationYears = document.getElementById("inputYears").value;
+    if (dropValPast === "month") {
+        pastSpend = pastSpend * 12 * durationYears;
+    } else if (dropValPast === "year") {
+        pastSpend = pastSpend * durationYears;
+    }
+    console.log(name);
+    console.log(birthDate);
+    console.log(pastSpend);
+    console.log(currentSpend);
+    console.log(lifeExpectancy);
+    navigation("hiddenForm", false);
+    navigation("featuredDiv", true);
+    createPerson(String(name), birthDate, Number(pastSpend), Number(currentSpend), Number(lifeExpectancy));
+}
+
+function displayForm() {
+    navigation("hiddenForm", true);
+    navigation("mainArea", false);
+    navigation("personGallery", false);
+}
+
+function featuredButtons(str) {
+    navigation("featuredDiv", false);
+    if (str == "home") {
+        document.getElementById('personGallery').innerHTML += actualHTML;
+        navigation("mainArea", true);
+        navigation("personGallery", true);
+    }
+    else if (str == "delete") {
+        console.log("Deleted!");
+        navigation("mainArea", true);
+        navigation("personGallery", true);
+    }
+    else if (str == "person") {
+        document.getElementById('personGallery').style.display = "none";
+        document.getElementById('personGallery').innerHTML += actualHTML;
+        navigation("hiddenForm", true);
+    }
+    else {
+        alert("An error occured!");
+    }
+}
+
+function navigation(element, bool) {
+    if (bool) {
+        document.getElementById(element).style.display = "block";
+        document.getElementById(element).className = "appear";
+    } else {
+        document.getElementById(element).className = "disappear";
+        setTimeout(function () {
+            document.getElementById(element).style.display = "none";
+        }, 2000);
+    }
+}
+</script>
+
+</html>
