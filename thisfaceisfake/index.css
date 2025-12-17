@@ -1,0 +1,131 @@
+html{
+    color: #202020;
+    background-color: #202020;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+nav, a {
+    font-family: "Roboto", sans-serif;
+}
+
+nav {
+    height: 75px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+  
+li {
+    margin: 0 20px;
+}
+  
+a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #39ff14;
+}
+
+a:hover + span {
+    color: #39ff14;
+}
+
+span {
+    margin-left: 5px;
+    font-size: 20px;
+}
+  
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 75px);
+}
+  
+.square-image {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+/* Pop Up */
+#popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 255px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  #popup.show {
+    opacity: 1;
+  }
+
+  #popup-message{
+    font-size: 15px;
+    margin-left: 0px;
+  }
+  
+  #popup-message a {
+    color: #00ff00;
+    text-decoration: underline;
+    font-size: 15px;
+  }
+  
+  #popup-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+/* Media Stuff */
+@media only screen and (max-width: 600px) {
+    li {
+        margin: 0 5px;
+    }
+}
+
+@media only screen and (max-width: 340px) {
+    li {
+        margin: 0 5px;
+    }
+    .iconCode{
+        display: none;
+    }
+    #popup {
+        width: auto;
+        bottom: 0px;
+        right: 0px;
+    }
+}

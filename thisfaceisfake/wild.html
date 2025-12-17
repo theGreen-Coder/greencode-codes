@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>This Face is Fake</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-21ETP1M8P0"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-21ETP1M8P0');
+    </script>
+</head>
+
+<body>
+    <div id="popup">
+        <span id="popup-message">
+          This face doesn't exist. But don't panic! Learn how this was done <a style="display: inline-block;" href="https://www.youtube.com/@Green-Code" target="_blank">here</a>. Photo created by using <a style="display: inline-block;" href="https://github.com/NVlabs/stylegan3" target="_blank">StyleGAN3</a>. Contact me <a style="display: inline-block;" href="mailto:contactmegreencode@gmail.com" target="_blank">here</a>.
+        </span>
+        <button id="popup-close">X</button>
+    </div>      
+	<nav>
+        <ul>
+            <li><a href="index.html"><span class="iconCode">&#x1F464;</span> Human</a></li>
+            <li><a href="dog.html"><span class="iconCode">&#x1F415;</span> Dog</a></li>
+            <li><a href="cat.html"><span class="iconCode">&#x1F408;</span> Cat</a></li>
+            <li><a href="wild.html" style="color: #39ff14;"><span class="iconCode">&#129418;</span> Wild</a></li>
+        </ul>
+        <a href="https://www.youtube.com/@Green-Code"><img src="youtube.png" style="width: 30px; height: 30px;" alt="YouTube"></a>
+    </nav>
+    
+    <div class="container">
+        <img src="" alt="Random Photo" class="square-image" id="random-photo">
+    </div>
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+            document.querySelector('#popup').classList.add('show');
+        }, 3000);
+        });
+
+        popup.addEventListener('click', () => {
+            document.getElementById("popup").style.display = "none";
+        });
+
+        // Generate a random number between 0 and the number of photos
+        const randomIndex = Math.floor(Math.random() * 1197);
+
+        // Get a reference to the image element
+        const img = document.getElementById("random-photo");
+
+        // Set the source of the image to a random photo
+        img.src = "images/wild/" + randomIndex.toString() + ".jpg";
+        console.log("images/wild/" + randomIndex.toString() + ".jpg");
+    </script>
+</body>
+</html>
